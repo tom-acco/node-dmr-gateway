@@ -1,5 +1,23 @@
 {
-  "dependencies": {
-    "dotenv": "^16.4.7"
-  }
+  "name": "dmr-gateway",
+  "version": "1.0.0",
+  "description": "A simple NodeJS implementation of the DMR gateway protocol for amateur radio.",
+  "main": "src/DMRGateway.js",
+  "directories": {
+    "doc": "docs",
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tom-acco/node-dmr-gateway.git"
+  },
+  "author": "tom-acco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tom-acco/node-dmr-gateway/issues"
+  },
+  "homepage": "https://github.com/tom-acco/node-dmr-gateway#readme"
 }

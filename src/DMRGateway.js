@@ -3,13 +3,12 @@ const EventEmitter = require("node:events");
 
 const crypto = require("crypto");
 
-const utils = require("../utils/utils");
-const c = require("../utils/colours");
+const utils = require("./utils");
+const c = require("./colours");
 
 exports.Configuration = class Configuration {
     constructor(){
         this.radioId = null;
-        this.radioIdHex = null;
         this.callsign = null;
         this.options = null;
 
@@ -27,7 +26,6 @@ exports.Configuration = class Configuration {
 
     setId(radioId){
         this.radioId = radioId;
-        this.radioIdHex = utils.hexUInt32BE(this.radioId);
     }
 
     setCallsign(callsign){
@@ -75,7 +73,7 @@ exports.Socket = class Socket extends EventEmitter {
     constructor(ip, port, password, config){
         super();
         
-        // Implements https://www.qsl.net/kb9mwr/projects/dv/dmr/DMRplus_IPSC_Protocol_for_HB_repeater.pdf
+        // Implements /docs/DMRplus_IPSC_Protocol_for_HB_repeater.pdf
 
         // Constructor params
         this.ip = ip;

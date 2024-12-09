@@ -2,48 +2,7 @@
 A simple NodeJS implementation of the DMR gateway protocol for amateur radio.
 
 ## Getting Started
-1. Install dependencies
-```
-npm i
-```
-
-2. Setup `.env` file.
-```
-## DMR Configuration
-RADIOID="1234567"
-CALLSIGN="N0CALL"
-OPTIONS="TS2_1=505"
-
-## DMR Server Details
-DMR_SERVER="43.245.72.67"
-DMR_PORT=55555
-DMR_PASSWORD="PASSWORD"
-```
-
-3. Run
-```
-node .
-```
-
-### Environment Variables
-
-#### RADIOID
-DMR Radio ID obtained from [radiodid.net](https://radioid.net/) with ESSID.
-
-#### CALLSIGN
-Amateur radio callsign.
-
-#### OPTIONS
-DMR options (such as talk groups).
-
-#### DMR_SERVER
-The DMR master server IP address.
-
-#### DMR_PORT
-The DMR master server port.
-
-#### DMR_PASSWORD
-The DMR master server password. Leave blank for no password.
+...
 
 ## Configuration
 ```js
