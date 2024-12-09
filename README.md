@@ -189,4 +189,4 @@ frame.getDestination()
 Returns the sequence of the frame
 ```js
 frame.getSequence()
-```# node-dmr-gateway
+```
