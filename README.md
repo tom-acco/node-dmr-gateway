@@ -28,7 +28,7 @@ node .
 ### Environment Variables
 
 #### RADIOID
-DMR Radio ID obtained from [radiodid.net](https://radioid.net/).
+DMR Radio ID obtained from [radiodid.net](https://radioid.net/) with ESSID.
 
 #### CALLSIGN
 Amateur radio callsign.
@@ -53,9 +53,9 @@ const config = new DMR.Configuration();
 ### Methods
 
 #### setId(radioId)
-Set the radio ID.
+Set the radio ID and ESSID
 ```js
-config.setId("1234567");
+config.setId("123456701");
 ```
 
 #### setCallsign(callsign)
