@@ -10,7 +10,7 @@ npm i git+https://github.com/tom-acco/node-dmr-gateway.git
 ### Usage
 ```js
 // Import the module
-const DMR = require("./classes/DMRGateway");
+const DMR = require("dmr-gateway");
 
 // Create a config
 const config = new DMR.Configuration();

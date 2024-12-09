@@ -1,4 +1,4 @@
-const DMR = require("./classes/DMRGateway");
+const DMR = require("dmr-gateway");
 
 const config = new DMR.Configuration();
 config.setId("123456701");
