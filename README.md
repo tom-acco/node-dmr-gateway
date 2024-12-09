@@ -2,7 +2,51 @@
 A simple NodeJS implementation of the DMR gateway protocol for amateur radio.
 
 ## Getting Started
-...
+### Install
+```shell
+npm i git+https://github.com/tom-acco/node-dmr-gateway.git
+```
+
+### Usage
+```js
+// Import the module
+const DMR = require("./classes/DMRGateway");
+
+// Create a config
+const config = new DMR.Configuration();
+
+// Set the parameters
+config.setId("123456701");
+config.setCallsign("N0CALL");
+config.setOptions("TS2_1=505");
+
+// Create the socket
+const socket = new DMR.Socket("43.245.72.67", 55555, null, config);
+
+// Bind the events
+socket.on("close", () => {
+    console.log("Socket closed");
+});
+
+socket.on("error", (error) => {
+    console.error(error);
+});
+
+socket.on("warning", (warning) => {
+    console.warn(warning);
+});
+
+socket.on("frame", (frame) => {
+    console.log(`${frame.getSource()}->${frame.getDestination()}: ${frame.getSequence()}`);
+});
+
+// Connect to the master server
+socket.connect().then(() => {
+    console.log("Connected to server");
+}).catch((err) => {
+    console.error(err);
+});
+```
 
 ## Configuration
 ```js
