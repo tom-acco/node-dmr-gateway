@@ -151,6 +151,12 @@ exports.Socket = class Socket extends EventEmitter {
                 return reject("Missing callsign!");
             }
 
+            if(!this.udpClient){
+                // UDP Socket
+                this.udpClient = new dgram.createSocket("udp4");
+                this.udpClient.on("message", this.udpMessageHandler);
+            }
+
             await this.sendRPTL();
 
             if(this.password){
@@ -207,7 +213,14 @@ exports.Socket = class Socket extends EventEmitter {
 
                 this.packetAckd = false;
 
+                // Close the dgram
                 this.udpClient.close();
+
+                // Remove the listener
+                this.udpClient.removeListener("message", this.udpMessageHandler);
+
+                // Clear the udpClient for next connect
+                this.udpClient = null;
 
                 this.emit("close");
     
