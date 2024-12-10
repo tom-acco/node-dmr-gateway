@@ -491,6 +491,6 @@ class DMRDataFrame {
     }
 
     getStreamId(){
-        return this.data.streamId;
+        return this.data.streamId.toString("hex");
     }
 }

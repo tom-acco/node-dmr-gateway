@@ -36,7 +36,7 @@ socket.on("warning", (warning) => {
 });
 
 socket.on("frame", (frame) => {
-    console.log(`${frame.getSource()}->${frame.getDestination()}: ${frame.getSequence()}`);
+    console.log(`${frame.getStreamId()}//${frame.getSource()}->${frame.getDestination()}: ${frame.getSequence()}`);
 });
 
 socket.connect().then(() => {
