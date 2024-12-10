@@ -466,6 +466,10 @@ class DMRDataFrame {
         return data;
     }
 
+    getSequence(){
+        return this.data.sequence;
+    }
+
     getSource(){
         return this.data.sourceId;
     }
@@ -474,7 +478,19 @@ class DMRDataFrame {
         return this.data.destId;
     }
 
-    getSequence(){
-        return this.data.sequence;
+    getTimeSlot(){
+        return this.data.details.ts;
+    }
+
+    getCallType(){
+        return this.data.details.ctype;
+    }
+
+    getFrameType(){
+        return this.data.details.ftype;
+    }
+
+    getStreamId(){
+        return this.data.streamId;
     }
 }

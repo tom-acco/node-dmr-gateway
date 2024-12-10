@@ -176,6 +176,12 @@ socket.on("frame", (frame) => {
 
 ### Methods
 
+#### getSequence()
+Returns the sequence of the frame
+```js
+frame.getSequence()
+```
+
 #### getSource()
 Returns the radio ID of the source
 ```js
@@ -188,8 +194,26 @@ Returns the destination ID (talkgroup)
 frame.getDestination()
 ```
 
-#### getSequence()
-Returns the sequence of the frame
+#### getTimeSlot()
+Returns the timeslot
 ```js
-frame.getSequence()
+frame.getTimeSlot()
+```
+
+#### getCallType()
+Returns the call type (group/private)
+```js
+frame.getCallType()
+```
+
+#### getFrameType()
+Returns the frame type (voice, voice sync, data sync)
+```js
+frame.getFrameType()
+```
+
+#### getStreamId()
+Returns the stream ID. A unique identifier from PTT press to PTT release
+```js
+frame.getStreamId()
 ```
