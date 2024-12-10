@@ -98,7 +98,7 @@ exports.Socket = class Socket extends EventEmitter {
         this.messageHandlers = {
             "RPTACK": (buffer) => {
                 if(this.debug === true){
-                    console.debug(c.FgGray, `Received RPTACK`, c.Reset);
+                    console.debug(new Date(), c.FgGray, `Received RPTACK`, c.Reset);
                 }
         
                 this.packetAckd = true;
@@ -106,14 +106,14 @@ exports.Socket = class Socket extends EventEmitter {
             },
             "MSTPONG": (buffer) => {
                 if(this.debug === true){
-                    console.debug(c.FgGray, `Received MSTPONG`, c.Reset);
+                    console.debug(new Date(), c.FgGray, `Received MSTPONG`, c.Reset);
                 }
 
                 this.lastPong = utils.getEpoch();
             },
             "DMRD": (buffer) => {
                 if(this.debug === true){
-                    console.debug(c.FgGray, `Received DMRD`, c.Reset);
+                    console.debug(new Date(), c.FgGray, `Received DMRD`, c.Reset);
                 }
 
                 const frame = new DMRDataFrame(buffer);
@@ -136,7 +136,7 @@ exports.Socket = class Socket extends EventEmitter {
         }
 
         if(this.debug === true){
-            console.debug(`UNHANDLED PACKET`);
+            console.debug(new Date(), c.FgGray, `UNHANDLED PACKET`, c.Reset);
             console.debug(buffer.toString("hex"));
         }
     }
@@ -196,7 +196,7 @@ exports.Socket = class Socket extends EventEmitter {
             const buf = Buffer.concat([packetType, radioId]);
 
             if(this.debug === true){
-                console.debug(c.FgGray, `Sending RPTCL`, c.Reset);
+                console.debug(new Date(), c.FgGray, `Sending RPTCL`, c.Reset);
             }
 
             if(this.pingInterval){
@@ -243,7 +243,7 @@ exports.Socket = class Socket extends EventEmitter {
             const buf = Buffer.concat([packetType, radioId]);
     
             if(this.debug === true){
-                console.debug(c.FgGray, `Sending RPTL`, c.Reset);
+                console.debug(new Date().toISOString(), c.FgGray, `Sending RPTL`, c.Reset);
             }
             
             this.udpClient.send(buf, this.port, this.ip, async (err) => {
@@ -277,7 +277,7 @@ exports.Socket = class Socket extends EventEmitter {
             const buf = Buffer.concat([packetType, radioId, data]);
 
             if(this.debug === true){
-                console.debug(c.FgGray, `Sending RPTK`, c.Reset);
+                console.debug(new Date(), c.FgGray, `Sending RPTK`, c.Reset);
             }
 
             this.udpClient.send(buf, this.port, this.ip, async (err) => {
@@ -343,7 +343,7 @@ exports.Socket = class Socket extends EventEmitter {
             ]);
     
             if(this.debug === true){
-                console.debug(c.FgGray, `Sending RPTC`, c.Reset);
+                console.debug(new Date(), c.FgGray, `Sending RPTC`, c.Reset);
             }
 
             this.udpClient.send(buf, this.port, this.ip, async (err) => {
@@ -375,7 +375,7 @@ exports.Socket = class Socket extends EventEmitter {
             const buf = Buffer.concat([packetType, radioId, data]);
 
             if(this.debug === true){
-                console.debug(c.FgGray, `Sending RPTO`, c.Reset);
+                console.debug(new Date(), c.FgGray, `Sending RPTO`, c.Reset);
             }
 
             this.udpClient.send(buf, this.port, this.ip, async (err) => {
@@ -405,7 +405,7 @@ exports.Socket = class Socket extends EventEmitter {
             const buf = Buffer.concat([packetType, radioId]);
 
             if(this.debug === true){
-                console.debug(c.FgGray, `Sending RPTPING`, c.Reset);
+                console.debug(new Date(), c.FgGray, `Sending RPTPING`, c.Reset);
             }
 
             this.udpClient.send(buf, this.port, this.ip, async (err) => {

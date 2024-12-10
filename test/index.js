@@ -43,6 +43,11 @@ socket.on("frame", (frame) => {
     console.log(`${frame.getStreamId()}//${frame.getSource()}->${frame.getDestination()}: ${frame.getSequence()}`);
 });
 
-socket.connect().catch((err) => {
+socket.connect().then(() => {
+    // Test reconnection
+    setTimeout(() => {
+        socket.close();
+    }, 10000);
+}).catch((err) => {
     console.error(err);
 });
