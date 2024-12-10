@@ -91,7 +91,7 @@ exports.Socket = class Socket extends EventEmitter {
         // State
         this.packetAckd = false;
         this.lastPacket = null;
-        this.lastPong = utils.getEpoch();
+        this.lastPong = null;
         this.pingInterval = null;
 
         // Message handlers
@@ -172,7 +172,7 @@ exports.Socket = class Socket extends EventEmitter {
             }
 
             this.pingInterval = setInterval(() => {
-                if(utils.getEpoch() - this.lastPong > 60){
+                if(this.lastPong && utils.getEpoch() - this.lastPong > 60){
                     this.emit("warning", "Socket has not received a reply for over 60 seconds. Closing the connection.");
                     this.close();
                 }else{
@@ -201,6 +201,7 @@ exports.Socket = class Socket extends EventEmitter {
 
             if(this.pingInterval){
                 clearInterval(this.pingInterval);
+                this.lastPong = null;
             }
 
             this.udpClient.send(buf, this.port, this.ip, async (err) => {
