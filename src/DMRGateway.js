@@ -179,6 +179,8 @@ exports.Socket = class Socket extends EventEmitter {
                     this.sendRPTPING();
                 }
             }, 5000);
+
+            this.emit("connect", this.udpClient);
             
             return resolve(true);
         });

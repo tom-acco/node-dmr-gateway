@@ -24,6 +24,10 @@ config.setOptions("TS2_1=505");
 const socket = new DMR.Socket("43.245.72.67", 55555, null, config);
 
 // Bind the events
+socket.on("connect", () => {
+    console.log("Socket connected");
+});
+
 socket.on("close", () => {
     console.log("Socket closed");
 });
@@ -41,9 +45,7 @@ socket.on("frame", (frame) => {
 });
 
 // Connect to the master server
-socket.connect().then(() => {
-    console.log("Connected to server");
-}).catch((err) => {
+socket.connect().catch((err) => {
     console.error(err);
 });
 ```
@@ -138,6 +140,14 @@ socket.close().then(() => {
 ```
 
 ### Events
+
+#### connect
+Fires when the `socket.connect()` method resolves.
+```js
+socket.on("connect", (client) => {
+    console.log("Socket connected");
+});
+```
 
 #### close
 Fires when the `socket.close()` method resolves.

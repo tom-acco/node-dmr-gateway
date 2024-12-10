@@ -17,6 +17,10 @@ const socket = new DMR.Socket("43.245.72.67", 55555, null, config);
 
 socket.debug = true;
 
+socket.on("connect", (client) => {
+    console.log(`Socket connected`);
+});
+
 socket.on("close", () => {
     console.log("Socket closed");
 
@@ -39,8 +43,6 @@ socket.on("frame", (frame) => {
     console.log(`${frame.getStreamId()}//${frame.getSource()}->${frame.getDestination()}: ${frame.getSequence()}`);
 });
 
-socket.connect().then(() => {
-    console.log("Connected to server");
-}).catch((err) => {
+socket.connect().catch((err) => {
     console.error(err);
 });
