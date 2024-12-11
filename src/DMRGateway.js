@@ -210,8 +210,10 @@ exports.Socket = class Socket extends EventEmitter {
                 }
 
                 //Wait for packet ack
-                while(this.packetAckd == false){
-                    await utils.sleep(1000);
+                let count = 0;
+                while(this.packetAckd == false && count <= 10){
+                    await utils.sleep(100);
+                    count++;
                 }
 
                 this.packetAckd = false;
