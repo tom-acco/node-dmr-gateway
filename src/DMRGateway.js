@@ -91,6 +91,7 @@ exports.Socket = class Socket extends EventEmitter {
         // State
         this.packetAckd = false;
         this.lastPacket = null;
+        this.pingCount = 0;
         this.lastPong = null;
         this.pingInterval = null;
 
@@ -174,6 +175,9 @@ exports.Socket = class Socket extends EventEmitter {
             this.pingInterval = setInterval(() => {
                 if(this.lastPong && utils.getEpoch() - this.lastPong > 60){
                     this.emit("warning", "Socket has not received a reply for over 60 seconds. Closing the connection.");
+                    this.close();
+                }else if(!this.lastPong && this.pingCount >= 5){
+                    this.emit("warning", "Sent 5 pings and did not receive a reply. Closing the connection.");
                     this.close();
                 }else{
                     this.sendRPTPING();
@@ -399,6 +403,8 @@ exports.Socket = class Socket extends EventEmitter {
 
     sendRPTPING = () => {
         return new Promise((resolve, reject) => {
+            this.pingCount++;
+
             const packetType = Buffer.from("RPTPING");
             
             const radioId = Buffer.alloc(4);
