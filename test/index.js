@@ -6,6 +6,24 @@ if(!process.argv[2] || !process.argv[3]){
     return console.error("Incorrect command line args. Usage: node test <radioid+essid> <callsign>");
 }
 
+process.on("SIGINT", m => {
+    handleStop();
+});
+
+process.on("SIGTERM", m => {
+    handleStop();
+});
+
+const handleStop = async () => {
+    if(socket){
+        await socket.close();
+    }
+
+    setTimeout(function(){
+        process.exit();
+    }, 100);
+}
+
 const radioId = process.argv[2];
 const callsign = process.argv[3];
 
