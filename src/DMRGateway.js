@@ -19,17 +19,20 @@ exports.Configuration = class Configuration {
         this.latitude = "+00.0000";
         this.longitude = "+000.0000";
         this.height = "0";
-        this.location = "LOCATION";
-        this.description = "DESCRIPTION";
+        this.location = "";
+        this.description = "";
         this.url = null;
     }
 
     setId(radioId){
-        this.radioId = radioId;
+        const buf = Buffer.alloc(4);
+        buf.writeUInt32BE(radioId);
+
+        this.radioId = buf.readUint32BE();
     }
 
     setCallsign(callsign){
-        this.callsign = callsign;
+        this.callsign = Buffer.from(callsign).subarray(0, 8).toString("ascii");
         
         if(this.url == null){
             this.url = `www.qrz.com/db/${this.callsign}`;
@@ -53,19 +56,28 @@ exports.Configuration = class Configuration {
         this.colourCode = colourCode;
     }
 
-    setLocation(latitude, longitude, height, town){
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.height = height;
-        this.location = town;
+    setLocation(town, latitude, longitude, height){
+        this.location = town.substring(0, 20);
+
+        if(latitude){
+            this.latitude = latitude;
+        }
+
+        if(longitude){
+            this.longitude = longitude;
+        }
+
+        if(height){
+            this.height = height;
+        }
     }
 
     setDescription(description){
-        this.description = description;
+        this.description = description.substring(0, 20);
     }
 
     setUrl(url){
-        this.url = url;
+        this.url = url.substring(0, 124);
     }
 }
 

@@ -93,10 +93,12 @@ Set the colour code.
 config.setColourCode("1");
 ```
 
-#### setLocation(latitude, longitude, height, town)
+#### setLocation(town, latitude, longitude, height)
 Set the location details.
 ```js
-config.setLocation("+00.0000", "+000.0000", "0", "LOCATION");
+config.setLocation("LOCATION");
+// or
+config.setLocation("LOCATION", "+00.0000", "+000.0000", "0");
 ```
 
 #### setDescription(description)
