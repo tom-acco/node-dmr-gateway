@@ -62,10 +62,7 @@ socket.on("frame", (frame) => {
 });
 
 socket.connect().then(() => {
-    // Test reconnection
-    setTimeout(() => {
-        socket.close();
-    }, 10000);
+
 }).catch((err) => {
     console.error(err);
 });
