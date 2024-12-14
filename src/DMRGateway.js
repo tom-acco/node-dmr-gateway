@@ -325,10 +325,10 @@ exports.Socket = class Socket extends EventEmitter {
             const url = Buffer.from(this.config.url.padEnd(124, " "));
             
             const softwareId = Buffer.alloc(40);
-            softwareId.write("node-dmr-server");
+            softwareId.write("node-dmr-gateway");
 
             const packageId = Buffer.alloc(40);
-            packageId.write("0.0.1");
+            packageId.write(require("../package.json").version);
 
             const buf = Buffer.concat([
                 packetType,
