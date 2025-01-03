@@ -451,7 +451,7 @@ class DMRDataFrame {
             radioId: buf.readUInt32BE(),
             details: this._readDMRDDetails(buf.slice(1)),
             streamId: buf.slice(4),
-            data: buf.slice(33)
+            data: this._readDMRDData(buf.slice(33))
         }
     }
 
@@ -489,6 +489,11 @@ class DMRDataFrame {
         return data;
     }
 
+    _readDMRDData = (buffer) => {
+        // TODO: Extract audio from this?
+        return buffer;
+    }
+
     getSequence(){
         return this.data.sequence;
     }
@@ -515,5 +520,9 @@ class DMRDataFrame {
 
     getStreamId(){
         return this.data.streamId.toString("hex");
+    }
+
+    getData(){
+        return this.data.data;
     }
 }

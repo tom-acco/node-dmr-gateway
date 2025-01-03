@@ -1,6 +1,6 @@
 {
   "name": "dmr-gateway",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple NodeJS implementation of the DMR gateway protocol for amateur radio.",
   "main": "src/DMRGateway.js",
   "directories": {

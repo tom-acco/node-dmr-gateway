@@ -229,3 +229,9 @@ Returns the stream ID. A unique identifier from PTT press to PTT release
 ```js
 frame.getStreamId()
 ```
+
+#### getData()
+Returns the DMR frame data.
+```js
+frame.getData()
+```

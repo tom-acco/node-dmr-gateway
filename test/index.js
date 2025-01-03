@@ -58,7 +58,8 @@ socket.on("warning", (warning) => {
 });
 
 socket.on("frame", (frame) => {
-    console.log(`${frame.getStreamId()}//${frame.getSource()}->${frame.getDestination()}: ${frame.getSequence()}`);
+    console.log(`${frame.getStreamId()}//${frame.getSource()}->${frame.getDestination()}: ${frame.getSequence()} [${frame.getFrameType()}]`);
+    console.log(`${frame.getData().toString("hex")}`);
 });
 
 socket.connect().then(() => {
