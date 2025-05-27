@@ -131,7 +131,14 @@ exports.Socket = class Socket extends EventEmitter {
 
                 const frame = new DMRDataFrame(buffer);
                 this.emit("frame", frame);
-            }
+            },
+            "MSTCL": (buffer) => {
+                if(this.debug === true){
+                    console.debug(c.FgGray, `${new Date().toISOString()} Received MSTCL`, c.Reset);
+                }
+
+                this.close(true);
+            },
         }
     }
 
@@ -202,7 +209,7 @@ exports.Socket = class Socket extends EventEmitter {
         });
     }
 
-    close = () => {
+    close = (ignoreAck) => {
         return new Promise((resolve, reject) => {
             const packetType = Buffer.from("RPTCL");
             
@@ -226,13 +233,15 @@ exports.Socket = class Socket extends EventEmitter {
                 }
 
                 //Wait for packet ack
-                let count = 0;
-                while(this.packetAckd == false && count <= 10){
-                    await utils.sleep(100);
-                    count++;
-                }
+                if(!ignoreAck){
+                    let count = 0;
+                    while(this.packetAckd == false && count <= 10){
+                        await utils.sleep(100);
+                        count++;
+                    }
 
-                this.packetAckd = false;
+                    this.packetAckd = false;
+                }
 
                 // Close the dgram
                 this.udpClient.close();
