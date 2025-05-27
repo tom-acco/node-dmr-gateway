@@ -31,7 +31,7 @@ config.setId(radioId);
 config.setCallsign(callsign);
 config.setOptions("TS2_1=505");
 
-const socket = new DMR.Socket("43.245.72.67", 55555, null, config);
+const socket = new DMR.Socket("127.0.0.1", 62031, "passw0rd", config);
 
 socket.debug = true;
 
